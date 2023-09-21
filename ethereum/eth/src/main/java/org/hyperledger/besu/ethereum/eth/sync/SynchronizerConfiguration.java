@@ -246,7 +246,9 @@ public class SynchronizerConfiguration {
     return propagationManagerGetBlockTimeoutMillis;
   }
 
-  public long getStopBlock() { return this.stopBlock; }
+  public long getStopBlock() {
+    return this.stopBlock;
+  }
 
   public static class Builder {
     private SyncMode syncMode = SyncMode.FULL;
@@ -274,7 +276,6 @@ public class SynchronizerConfiguration {
     private long worldStateMinMillisBeforeStalling = DEFAULT_WORLD_STATE_MIN_MILLIS_BEFORE_STALLING;
     private int worldStateTaskCacheSize = DEFAULT_WORLD_STATE_TASK_CACHE_SIZE;
     private long stopBlock;
-
 
     private long propagationManagerGetBlockTimeoutMillis =
         DEFAULT_PROPAGATION_MANAGER_GET_BLOCK_TIMEOUT_MILLIS;
@@ -424,7 +425,7 @@ public class SynchronizerConfiguration {
           computationParallelism,
           maxTrailingPeers,
           propagationManagerGetBlockTimeoutMillis,
-              stopBlock);
+          stopBlock);
     }
   }
 }

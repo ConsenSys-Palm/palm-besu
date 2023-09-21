@@ -53,7 +53,7 @@ public class IbftController extends BaseBftController {
         duplicateMessageTracker,
         futureMessageBuffer,
         sychronizerUpdater,
-            stopBlock);
+        stopBlock);
     this.ibftBlockHeightManagerFactory = ibftBlockHeightManagerFactory;
   }
 

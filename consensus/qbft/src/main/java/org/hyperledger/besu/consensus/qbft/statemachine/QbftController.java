@@ -55,7 +55,7 @@ public class QbftController extends BaseBftController {
         duplicateMessageTracker,
         futureMessageBuffer,
         sychronizerUpdater,
-            0);
+        0);
     this.qbftBlockHeightManagerFactory = qbftBlockHeightManagerFactory;
     this.bftExtraDataCodec = bftExtraDataCodec;
   }

@@ -155,7 +155,9 @@ public class MiningParameters {
     return posBlockCreationTimeout;
   }
 
-  public long getStopBlock() { return this.stopBlock; }
+  public long getStopBlock() {
+    return this.stopBlock;
+  }
 
   @Override
   public boolean equals(final Object o) {
@@ -386,7 +388,7 @@ public class MiningParameters {
           powJobTimeToLive,
           maxOmmerDepth,
           posBlockCreationTimeout,
-              stopBlock);
+          stopBlock);
     }
   }
 }
