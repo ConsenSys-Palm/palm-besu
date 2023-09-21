@@ -414,6 +414,7 @@ jobs:
           command: |
             docker login --username "${DOCKER_USER_RW}" --password "${DOCKER_PASSWORD_RW}"
             ./gradlew --no-daemon "-Pbranch=${CIRCLE_BRANCH}" dockerUpload
+
   manifestDocker:
     executor: besu_executor_med
     steps:
@@ -460,68 +461,58 @@ workflows:
       - buildArm64Docker:
           requires:
             - assemble
-      - publish:
-          filters:
-            branches:
-              only:
-                - main
-                - /^release-.*/
-          requires:
-            - assemble
-            - integrationTests
-            - unitTests
-            - acceptanceTests
-            - referenceTests
-            - buildDocker
-      - publishDocker:
-          filters:
-            branches:
-              only:
-                - main
-                - /^release-.*/
-          requires:
-            - assemble
-            - integrationTests
-            - unitTests
-            - acceptanceTests
-            - referenceTests
-            - buildDocker
-          context:
-            - besu-dockerhub-rw
-      - publishArm64Docker:
-          filters:
-            branches:
-              only:
-                - main
-                - /^release-.*/
-          requires:
-            - integrationTests
-            - unitTests
-            - acceptanceTests
-            - referenceTests
-            - buildArm64Docker
-          context:
-            - besu-dockerhub-rw
-      - manifestDocker:
-          filters:
-            branches:
-              only:
-                - main
-                - /^release-.*/
-          requires:
-            - publishDocker
-            - publishArm64Docker
-          context:
-            - besu-dockerhub-rw
+      # - publish:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #           - /^release-.*/
+      #     requires:
+      #       - assemble
+      #       - integrationTests
+      #       - unitTests
+      #       - acceptanceTests
+      #       - referenceTests
+      #       - buildDocker
+      # - publishDocker:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #           - /^release-.*/
+      #     requires:
+      #       - assemble
+      #       - integrationTests
+      #       - unitTests
+      #       - acceptanceTests
+      #       - referenceTests
+      #       - buildDocker
+      #     context:
+      #       - besu-dockerhub-rw
+      # - publishArm64Docker:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #           - /^release-.*/
+      #     requires:
+      #       - integrationTests
+      #       - unitTests
+      #       - acceptanceTests
+      #       - referenceTests
+      #       - buildArm64Docker
+      #     context:
+      #       - besu-dockerhub-rw
+      # - manifestDocker:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #           - /^release-.*/
+      #     requires:
+      #       - publishDocker
+      #       - publishArm64Docker
+      #     context:
+      #       - besu-dockerhub-rw
 
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 19 * * *"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - assemble
-      - dockerScan
+
